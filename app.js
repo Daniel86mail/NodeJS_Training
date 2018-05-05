@@ -3,27 +3,27 @@ console.log('starting app.js');
 const fs = require('fs');
 //3rd party modules
 const _ = require('lodash');
-
+const yargs = require('yargs');
 //my modules
 const notes = require('./notes');
 
-var command = process.argv[2];
-
+var argv = yargs.argv;
+var command = argv._[0];
 
 switch(command){
     case 'add':
-    console.log('adding new note');
-    break;
+        notes.addNote(argv.title, argv.body);
+        break;
     case 'read':
-    console.log('reading note');
-    break;
+        notes.read(argv.title);
+        break;
     case 'remove':
-    console.log('removing note');
-    break;
+        notes.remove(argv.title);
+        break;
     case 'list':
-    console.log('listing all notes');
-    break;
+        notes.list();
+        break;
     default:
-    console.log('command not recognized');
-    break;
+        console.log('command not recognized');
+        break;
 }
