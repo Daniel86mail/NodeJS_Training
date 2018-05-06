@@ -12,7 +12,11 @@ var command = argv._[0];
 
 switch(command){
     case 'add':
-        notes.addNote(argv.title, argv.body);
+        var note = notes.addNote(argv.title, argv.body);
+        if(note)
+            console.log(`Note ${argv.title} saved`);
+        else
+            console.log('A note with the same title already exits');
         break;
     case 'read':
         notes.read(argv.title);

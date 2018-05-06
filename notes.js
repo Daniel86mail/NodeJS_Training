@@ -1,13 +1,8 @@
 const fs = require('fs');
 const _ = require('lodash');
 
-var addNote = (title, body)=>{
+var fetchNotes = () => {
     var notes = [];
-    var note = {
-        title,
-        body
-    };
-
     try{
         var notesString = fs.readFileSync('notes-data.json');
         notes = JSON.parse(notesString);
@@ -16,11 +11,26 @@ var addNote = (title, body)=>{
 
     }
 
+    return notes;
+};
+
+var saveNotes = (notes) => {
+    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
+
+var addNote = (title, body)=>{
+    var notes = fetchNotes();
+
     var duplicateNotes = notes.filter((note)=> note.title === title); // the same as normal arrow function using {return}
 
     if(duplicateNotes.length === 0){
+        var note = {
+            title,
+            body
+        };
         notes.push(note);
-        fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+        saveNotes(notes);
+        return note;
     }
 };
 
