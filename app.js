@@ -19,10 +19,16 @@ switch(command){
             console.log('A note with the same title already exits');
         break;
     case 'read':
-        notes.read(argv.title);
+        var note = notes.read(argv.title);
+        if(note)
+            console.log(note.body);    
+        else
+            console.log('Note not found');
         break;
     case 'remove':
-        notes.remove(argv.title);
+        var removedNote = notes.remove(argv.title);
+        var message = removedNote ? `the note ${argv.title} was removed` : 'the note was not found';
+        console.log(message);
         break;
     case 'list':
         notes.list();

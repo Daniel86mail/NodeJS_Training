@@ -35,13 +35,22 @@ var addNote = (title, body)=>{
 };
 
 var read = (title)=>{
-    console.log(`reading ${title}`);
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((n) => n.title === title);
+    return filteredNotes[0];
 };  
 var remove = (title)=>{
-    console.log(`removing ${title}`);
+    var notes = fetchNotes();
+    var notesToKeep = notes.filter((note)=> note.title !== title);
+    saveNotes(notesToKeep);
+
+    return notes.length !== notesToKeep.length;
 };
 var list = ()=>{
-    console.log('getting all notes');
+    var notes = fetchNotes();
+    _.each(notes, (note)=>{
+        console.log(note.title);
+    });
 };
 
 module.exports = {
