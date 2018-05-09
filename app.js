@@ -1,5 +1,3 @@
-console.log('starting app.js');
-console.log('  ');
 //core modules
 const fs = require('fs');
 //3rd party modules
