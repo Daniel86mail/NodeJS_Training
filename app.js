@@ -1,4 +1,5 @@
 console.log('starting app.js');
+console.log('  ');
 //core modules
 const fs = require('fs');
 //3rd party modules
@@ -9,6 +10,13 @@ const notes = require('./notes');
 
 var argv = yargs.argv;
 var command = argv._[0];
+
+var printNote = (note) =>{
+    console.log(note.title);
+    console.log('---');
+    console.log(note.body);
+    console.log('   ');   
+}
 
 switch(command){
     case 'add':
@@ -21,7 +29,7 @@ switch(command){
     case 'read':
         var note = notes.read(argv.title);
         if(note)
-            console.log(note.body);    
+            printNote(note);   
         else
             console.log('Note not found');
         break;
@@ -31,7 +39,9 @@ switch(command){
         console.log(message);
         break;
     case 'list':
-        notes.list();
+        var items = notes.list();
+        console.log(`printing ${items.length} note(s)`);
+        _.each(items, (note) => printNote(note));
         break;
     default:
         console.log('command not recognized');

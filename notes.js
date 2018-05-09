@@ -47,10 +47,7 @@ var remove = (title)=>{
     return notes.length !== notesToKeep.length;
 };
 var list = ()=>{
-    var notes = fetchNotes();
-    _.each(notes, (note)=>{
-        console.log(note.title);
-    });
+    return fetchNotes();
 };
 
 module.exports = {
